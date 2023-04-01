@@ -25,12 +25,11 @@ function addListeners() {
 }
 
 function startGame() {
-    if (!level) {
-        $(document).off('keydown')
-        $('.start-btn').off('click')
-        addLevel()
-        addListeners()
-    }
+    $('.start-btn').text('End the game to start again')
+    $(document).off('keydown')
+    $('.start-btn').off('click')
+    addLevel()
+    addListeners()
 }
 
 function addLevel() {

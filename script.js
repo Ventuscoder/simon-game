@@ -26,6 +26,8 @@ function addListeners() {
 
 function startGame() {
     if (!level) {
+        $(document).off('keydown')
+        $('.start-btn').off('click')
         addLevel()
         addListeners()
     }
@@ -33,6 +35,8 @@ function startGame() {
 
 function addLevel() {
     level++
+    userCounter = 0
+    userSequence = []
     $('#level-title').text('Level '+level)
     $('.level').text(level)
     $('.num').text('0')
@@ -50,7 +54,6 @@ function userInput(color) {
     if (sequence[userCounter]==color) {
         userSequence.push(color)
         userCounter++
-        console.log(sequence,userCounter, userSequence)
         $('.num').text(userCounter)
         if (level==userCounter) {
             setTimeout(()=>{addLevel()}, 800)
@@ -67,9 +70,9 @@ function animatePress(color) {
 
 function endGame() {
     $('.btn').off('click')
-    userCounter = 0
-    userSequence = []
     sequence = []
     $('#level-title').text('Game ended at level '+level)
+    $('.start-btn').text('Press me to start again')
     level = 0
+    $('.start-btn').click(()=>startGame())
 }
